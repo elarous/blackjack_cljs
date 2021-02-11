@@ -1,0 +1,17 @@
+{:source-paths ["src"]
+ :dependencies [[org.clojure/clojurescript "1.10.773" :scope "provided"]
+                [re-frame "1.1.1"]
+                [reagent "0.10.0"]
+                [day8.re-frame/re-frame-10x "0.7.0"]
+                [herb "0.10.0"]]
+ :nrepl        {:port 6000}
+ :dev-http     {8081 "public"}
+ :builds       {:app {:target     :browser
+                      :output-dir "public/scripts/"
+                      :asset-path "/scripts/"
+                      :modules    {:core {:init-fn blackjack-cljs.core/init!}}
+                      :devtools
+                                  {:watch-dir "resources/public"
+                                   :preloads  [day8.re-frame-10x.preload]}
+                      :dev
+                                  {:closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}}}}}

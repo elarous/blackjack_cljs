@@ -1,0 +1,6 @@
+.idea/
+.shadow-cljs/
+node_modules/
+public/scripts/cljs-runtime
+public/scripts/manifest.edn
+blackjack_cljs.iml
