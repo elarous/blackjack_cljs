@@ -3,4 +3,5 @@
 node_modules/
 public/scripts/cljs-runtime
 public/scripts/manifest.edn
+public/scripts/core.js
 blackjack_cljs.iml
