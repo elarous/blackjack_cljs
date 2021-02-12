@@ -4,6 +4,7 @@
   {:green          "#8FE388"
    :red            "#E26D5A"
    :primary        "#43BCCD"
+   :secondary      "#7F7EFF"
    :primary-text   "#2F131E"
    :secondary-text "#240115"
    :grey-lighter   "#F5F5F5"
@@ -25,6 +26,25 @@
    :border-radius "15px"
    :border        "1px solid black"
    :position      "absolute"})
+
+(defn round-card []
+  {:font-family             "Indie Flower"
+   :font-size               (sizes 5)
+   :background              (:grey-light colors)
+   :color                   (:secondary colors)
+   :border-top-right-radius (sizes 1)
+   :border-top-left-radius  (sizes 1)
+   :padding                 (str (sizes 1) " " (sizes 3))
+   :display                 "flex"
+   :justify-content         "space-between"})
+
+(defn round-lbl []
+  {:color (:primary colors)})
+
+(defn round-num []
+  {:color (:secondary colors)})
+
+
 
 (defn stats-card []
   {:background-color (:grey-lighter colors)

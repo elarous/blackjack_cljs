@@ -16,6 +16,9 @@
 
 (defn stats-column []
   [:div
+   [:div {:class (<class stl/round-card)}
+    [:div {:class (<class stl/round-lbl)} "Round"]
+    [:div {:class (<class stl/round-num)} 1223]]
    [:div {:class (<class stl/stats-card)}
     [:div {:class (<class stl/stats-card-item)}
      [:div {:class (<class stl/stats-card-lbl)} "Wins"]
@@ -23,7 +26,6 @@
     [:div {:class (<class stl/stats-card-item)}
      [:div {:class (<class stl/stats-card-lbl)} "Losses"]
      [:div {:class (<class stl/stats-card-losses)} "0"]]]])
-
 
 (defn container [& columns]
   [:div {:class (<class stl/container)} columns])
