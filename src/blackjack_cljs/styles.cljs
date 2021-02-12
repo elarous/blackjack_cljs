@@ -15,7 +15,15 @@
 
 (defn container []
   {:display               "grid"
-   :grid-template-columns "20% 60% 20%"})
+   :grid-template-columns "20% 60% 20%"
+   :height                "100%"})
+
+(defn game-column []
+  {:display         "flex"
+   :flex-direction  "column"
+   :padding-top     (sizes 2)
+   :padding-bottom  (sizes 2)
+   :justify-content "space-between"})
 
 (defn deck []
   {:position "relative"})
@@ -44,8 +52,6 @@
 (defn round-num []
   {:color (:secondary colors)})
 
-
-
 (defn stats-card []
   {:background-color (:grey-lighter colors)
    :padding          (str (sizes 1) " " (sizes 4))
@@ -69,3 +75,68 @@
 (defn stats-card-losses []
   {:color     (:red colors)
    :font-size (sizes 4)})
+
+(defn contender [end?]
+  {:display        "flex"
+   :flex-direction "column"
+   :align-items    (if end? "flex-end" "flex-start")})
+
+(defn avatar []
+  {:display         "flex"
+   :justify-content "center"
+   :align-items     "center"
+   :height          (sizes 15)
+   :width           (sizes 15)
+   :border          (str "3px solid " (:grey-lighter colors))
+   :border-radius   "50%"
+   :padding         (sizes 2)})
+
+(defn player-avatar-img []
+  {:height (sizes 14)})
+
+(defn player-row []
+  {:display         "flex"
+   :justify-content "space-between"
+   :align-items     "center"})
+
+(defn contender-name []
+  {:font-family "Indie Flower"
+   :color       (:primary-text colors)
+   :font-size   (sizes 2)
+   :margin      (str "0 " (sizes 7))})
+
+(defn card-container []
+  {:margin (sizes 1)})
+
+(defn card []
+  {:height (sizes 25)})
+
+(defn cards []
+  {:display "flex"})
+
+(defn button []
+  ^{:pseudo {:hover {:background-position "right center"
+                     :color               "#fff"
+                     :text-decoration     "none"}}}
+  {:padding         (str (sizes 2) " 0")
+   :width (sizes 30)
+   :margin          (sizes 1)
+   :font-family     "Indie Flower"
+   :font-size       (sizes 3)
+   :border          "none"
+   :border-radius   (sizes 1)
+   ;:padding          "15px 45px"
+   :text-align      "center"
+   ;:text-transform   "uppercase"
+   :transition      "0.5s"
+   :background-size "200% auto"
+   :color           "white"
+   :box-shadow      "0 0 20px #eee"
+   :display         "block"
+   :outline         "none"})
+
+(defn button-hit []
+  {:background-image "linear-gradient(to right, #FF8008 0%, #FFC837  51%, #FF8008  100%)"})
+
+(defn button-stand []
+  {:background-image "linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%)"})
