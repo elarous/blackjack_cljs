@@ -2,53 +2,77 @@
   (:require [re-frame.core :as rf]
             [herb.core :refer [<class join]]
             [clojure.string :as s]
-            [blackjack-cljs.styles :as stl]))
+            [blackjack-cljs.styles :as stl]
+            [blackjack-cljs.subs]
+            [blackjack-cljs.events]))
 
 (defn heading-row []
-  [:div {:class (<class stl/heading-row)} "Round 1"])
+  (let [round @(rf/subscribe [:round])]
+    [:div {:class (<class stl/heading-row)}
+     (str "Round " round)]))
 
 (defn dealer []
-  [:div {:class (<class stl/contender false)}
-   [:div {:class (<class stl/stats-losses)} "0"]
-   [:div {:class (<class stl/avatar)}
-    [:img {:src (str "imgs/dealer.svg")}]]
-   [:div {:class (<class stl/contender-name)} "Dealer"]])
-
-(defn player-actions-row []
-  [:div {:class (<class stl/player-actions)}
-   [:button {:class (join (<class stl/button) (<class stl/button-hit))} "Hit"]
-   [:button {:class (join (<class stl/button) (<class stl/button-stand))} "Stand"]])
+  (let [score @(rf/subscribe [:score :dealer])]
+    [:div {:class (<class stl/contender false)}
+     [:div {:class (<class stl/stats-losses)} score]
+     [:div {:class (<class stl/avatar)}
+      [:img {:src (str "imgs/dealer.svg")}]]
+     [:div {:class (<class stl/contender-name)} "Dealer"]]))
 
 (defn player []
-  [:div {:class (<class stl/contender true)}
-   [:div {:class (<class stl/stats-wins)} "0"]
-   [:div {:class (<class stl/avatar)}
-    [:img {:class (<class stl/player-avatar-img)
-           :src   (str "imgs/player.svg")}]]
-   [:div {:class (<class stl/contender-name)} "Player"]])
+  (let [score @(rf/subscribe [:score :player])]
+    [:div {:class (<class stl/contender true)}
+     [:div {:class (<class stl/stats-wins)} score]
+     [:div {:class (<class stl/avatar)}
+      [:img {:class (<class stl/player-avatar-img)
+             :src   (str "imgs/player.svg")}]]
+     [:div {:class (<class stl/contender-name)} "Player"]]))
 
-(defn card [{:keys [kind number]}]
-  (let [img-name (str number (-> kind name first s/upper-case))]
-    [:div {:class (<class stl/card-container)}
-     [:img {:class (<class stl/card)
-            :src (str "imgs/cards/" img-name ".svg")}]]))
+(defn card [{:keys [path face-down?]}]
+  [:div {:class (<class stl/card-container)}
+   [:img {:class (<class stl/card)
+          :src path}]])
 
-(defn cards []
-  [:div {:class (<class stl/cards)}
-   [card {:kind :hearts :number 4}]
-   [card {:kind :spades :number \Q}]
-   [card {:kind :diamonds :number 6}]])
+(defn cards [{:keys [contender]}]
+  (let [cards-data @(rf/subscribe [:cards contender])]
+    [:div {:class (<class stl/cards)}
+     (for [card-data cards-data]
+       [card card-data])]))
 
 (defn container [& columns]
   [:div {:class (<class stl/container)} columns])
 
+(defn win []
+  [:div "You Won!"])
+
+(defn loss []
+  [:div "You Lost!"])
+
+(defn draw []
+  [:div "It's a Draw!"])
+
+(defn player-actions []
+  [:div {:class (<class stl/player-actions)}
+   [:button {:class (join (<class stl/button) (<class stl/button-hit))} "Hit"]
+   [:button {:class (join (<class stl/button) (<class stl/button-stand))} "Stand"]])
+
+(defn player-actions-row []
+  (let [won? @(rf/subscribe [:won?])
+        lost? @(rf/subscribe [:lost?])
+        draw? @(rf/subscribe [:draw?])]
+    (cond
+      won? [win]
+      lost? [loss]
+      draw? [draw]
+      :else [player-actions])))
+
 (defn game-row []
   [:div {:class (<class stl/game-row)}
    [dealer {:name "dealer"}]
-   [cards]
+   [cards {:contender :dealer}]
    [:div]
    [:div]
-   [cards]
+   [cards {:contender :player}]
    [player {:name "player"}]])
 
 (defn page []
