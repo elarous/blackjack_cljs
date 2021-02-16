@@ -13,6 +13,9 @@
 (defn sizes [num]
   (str (* num 8) "px"))
 
+(def fonts
+  {:main "Indie Flower"})
+
 (defn container []
   {:display               "grid"
    :grid-template-rows "20% 60% 20%"
@@ -27,7 +30,7 @@
    :padding-bottom  (sizes 2)})
 
 (defn heading-row []
-  {:font-family "Indie Flower"
+  {:font-family (:main fonts)
    :font-size (sizes 5)
    :text-align "center"
    :margin (sizes 2)
@@ -65,7 +68,7 @@
    :align-items     "center"})
 
 (defn contender-name []
-  {:font-family "Indie Flower"
+  {:font-family (:main fonts)
    :color       (:primary-text colors)
    :font-size   (sizes 2)
    :margin      (str "0 " (sizes 7))})
@@ -87,7 +90,7 @@
    :width (sizes 30)
    :height (sizes 10)
    :margin          (sizes 1)
-   :font-family     "Indie Flower"
+   :font-family     (:main fonts)
    :font-size       (sizes 3)
    :border          "none"
    :border-radius   (sizes 1)
@@ -110,4 +113,27 @@
 (defn button-stand []
   {:background-image "linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%)"
    :margin (str "0 " (sizes 5))})
+
+(defn button-new-round []
+  {:background-image "linear-gradient(to right, #642B73 0%, #C6426E  51%, #642B73  100%)"})
+
+(defn end-msg []
+  {:font-family (:main fonts)
+   :font-size (sizes 5)
+   :display "flex"
+   :flex-direction "column"
+   :justify-content "center"
+   :align-items "center"})
+
+(defn win []
+  ^{:extend [end-msg]}
+  {:color (:green colors)})
+
+(defn loss []
+  ^{:extend [end-msg]}
+  {:color (:red colors)})
+
+(defn draw []
+  ^{:extend [end-msg]}
+  {:color (:primary colors)})
 

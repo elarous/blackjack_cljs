@@ -10,7 +10,7 @@
   {:wins      10
    :losses    3
    :has-won?  false
-   :has-lost? false
+   :has-lost? true
    :draw?     false
    :cards     (-> (for [type [:hearts :clubs :diamonds :spades]
                         number [\A 2 3 4 5 6 7 8 9 10 \J \Q \K]]

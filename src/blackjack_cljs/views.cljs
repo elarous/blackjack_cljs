@@ -42,14 +42,24 @@
 (defn container [& columns]
   [:div {:class (<class stl/container)} columns])
 
+(defn new-round []
+  [:button {:class (join (<class stl/button) (<class stl/button-new-round))}
+   "Next Round"])
+
 (defn win []
-  [:div "You Won!"])
+  [:div {:class (<class stl/win)}
+   "You Won!"
+   [new-round]])
 
 (defn loss []
-  [:div "You Lost!"])
+  [:div {:class (<class stl/loss)}
+   "You Lost!"
+   [new-round]])
 
 (defn draw []
-  [:div "It's a Draw!"])
+  [:div {:class (<class stl/draw)}
+   "It's a Draw!"
+   [new-round]])
 
 (defn player-actions []
   [:div {:class (<class stl/player-actions)}
