@@ -26,61 +26,25 @@
    :padding-top     (sizes 2)
    :padding-bottom  (sizes 2)})
 
-(defn deck []
-  {:position "relative"})
+(defn heading-row []
+  {:font-family "Indie Flower"
+   :font-size (sizes 5)
+   :text-align "center"
+   :margin (sizes 2)
+   :color (:secondary colors)})
 
-(defn deck-card [left shadow]
-  {:left          (str left "px")
-   :box-shadow    (if shadow "4px 4px 8px rgba(0,0,0,1)" "none")
-   :border-radius "15px"
-   :border        "1px solid black"
-   :position      "absolute"})
-
-(defn round-card []
-  {:font-family             "Indie Flower"
-   :font-size               (sizes 5)
-   :background              (:grey-light colors)
-   :color                   (:secondary colors)
-   :border-top-right-radius (sizes 1)
-   :border-top-left-radius  (sizes 1)
-   :padding                 (str (sizes 1) " " (sizes 3))
-   :display                 "flex"
-   :justify-content         "space-between"})
-
-(defn round-lbl []
-  {:color (:primary colors)})
-
-(defn round-num []
-  {:color (:secondary colors)})
-
-(defn stats-card []
-  {:background-color (:grey-lighter colors)
-   :padding          (str (sizes 1) " " (sizes 4))
-   :border-radius    "5px"
-   :font-family      "Indie Flower"})
-
-(defn stats-card-item []
-  {:display         "flex"
-   :justify-content "space-between"
-   :align-items     "center"
-   :font-size       (sizes 3)
-   :margin          (sizes 1)})
-
-(defn stats-card-lbl []
-  {:color (:primary colors)})
-
-(defn stats-card-wins []
+(defn stats-wins []
   {:color     (:green colors)
    :font-size (sizes 4)})
 
-(defn stats-card-losses []
+(defn stats-losses []
   {:color     (:red colors)
    :font-size (sizes 4)})
 
 (defn contender [end?]
   {:display        "flex"
    :flex-direction "column"
-   :align-items    (if end? "flex-end" "flex-start")})
+   :align-items "center"})
 
 (defn avatar []
   {:display         "flex"
@@ -121,14 +85,13 @@
                      :text-decoration     "none"}}}
   {:padding         (str (sizes 2) " 0")
    :width (sizes 30)
+   :height (sizes 10)
    :margin          (sizes 1)
    :font-family     "Indie Flower"
    :font-size       (sizes 3)
    :border          "none"
    :border-radius   (sizes 1)
-   ;:padding          "15px 45px"
    :text-align      "center"
-   ;:text-transform   "uppercase"
    :transition      "0.5s"
    :background-size "200% auto"
    :color           "white"
@@ -136,8 +99,15 @@
    :display         "block"
    :outline         "none"})
 
+(defn player-actions []
+  {:display "flex"
+   :justify-content "center"})
+
 (defn button-hit []
-  {:background-image "linear-gradient(to right, #FF8008 0%, #FFC837  51%, #FF8008  100%)"})
+  {:background-image "linear-gradient(to right, #FF8008 0%, #FFC837  51%, #FF8008  100%)"
+   :margin (str "0 " (sizes 5))})
 
 (defn button-stand []
-  {:background-image "linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%)"})
+  {:background-image "linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%)"
+   :margin (str "0 " (sizes 5))})
+
