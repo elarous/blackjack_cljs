@@ -12,5 +12,6 @@
   (rdom/render [#'page] (.getElementById js/document "app")))
 
 (defn init! []
-  (rf/dispatch-sync [:initialize-db])
+  (rf/dispatch-sync [:>initialize-db])
+  (rf/dispatch-sync [:>play-round])
   (mount-components))

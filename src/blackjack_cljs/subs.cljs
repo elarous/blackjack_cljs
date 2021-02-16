@@ -6,7 +6,7 @@
  :cards
  (fn [db [_ contender]]
    (let [card-name (fn [card]
-                     (str (:number card) (-> card :kind name first s/upper-case)))]
+                     (str (:number card) (-> card :type name first s/upper-case)))]
      (map (fn [card]
             {:path (str "imgs/cards/" (card-name card) ".svg")
              :face-down? (:face-down? card)})
@@ -39,8 +39,10 @@
  (fn [db _]
    (:draw? db)))
 
+
 (comment
   @(rf/subscribe [:cards :player])
+
   @(rf/subscribe [:score :dealer])
   @(rf/subscribe [:round])
 

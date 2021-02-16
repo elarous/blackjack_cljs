@@ -7,17 +7,17 @@
    (reduce conj (.-EMPTY PersistentQueue)  coll)))
 
 (def app-db
-  {:wins      10
-   :losses    3
+  {:wins      0
+   :losses    0
    :has-won?  false
-   :has-lost? true
+   :has-lost? false
    :draw?     false
    :cards     (-> (for [type [:hearts :clubs :diamonds :spades]
                         number [\A 2 3 4 5 6 7 8 9 10 \J \Q \K]]
                     (hash-map :type type :number number :face-down? false))
                   shuffle
                   queue)
-   :round     5
-   :player    [{:kind :hearts :number 3 :face-down? false} {:kind :spades :number 5 :face-down? false}]
-   :dealer    [{:kind :diamonds :number \K :face-down? false} {:kind :hearts :number \A :face-down? true}]})
+   :round     0
+   :player    []
+   :dealer    []})
 

@@ -137,3 +137,9 @@
   ^{:extend [end-msg]}
   {:color (:primary colors)})
 
+(defn hidden-card []
+  {:height "200px"
+   :width "142px"
+   :background-color (:primary colors)
+   :border-radius (sizes 1)})
+

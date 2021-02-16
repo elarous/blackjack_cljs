@@ -6,6 +6,7 @@
             [blackjack-cljs.subs]
             [blackjack-cljs.events]))
 
+
 (defn heading-row []
   (let [round @(rf/subscribe [:round])]
     [:div {:class (<class stl/heading-row)}
@@ -30,8 +31,10 @@
 
 (defn card [{:keys [path face-down?]}]
   [:div {:class (<class stl/card-container)}
-   [:img {:class (<class stl/card)
-          :src path}]])
+   (if face-down?
+     [:div {:class (<class stl/hidden-card)}]
+     [:img {:class (<class stl/card)
+            :src path}])])
 
 (defn cards [{:keys [contender]}]
   (let [cards-data @(rf/subscribe [:cards contender])]
@@ -43,7 +46,8 @@
   [:div {:class (<class stl/container)} columns])
 
 (defn new-round []
-  [:button {:class (join (<class stl/button) (<class stl/button-new-round))}
+  [:button {:class (join (<class stl/button) (<class stl/button-new-round))
+            :on-click #(rf/dispatch [:>play-round])}
    "Next Round"])
 
 (defn win []
@@ -63,8 +67,12 @@
 
 (defn player-actions []
   [:div {:class (<class stl/player-actions)}
-   [:button {:class (join (<class stl/button) (<class stl/button-hit))} "Hit"]
-   [:button {:class (join (<class stl/button) (<class stl/button-stand))} "Stand"]])
+   [:button {:class (join (<class stl/button) (<class stl/button-hit))
+             :on-click #(rf/dispatch [:>hit])}
+    "Hit"]
+   [:button {:class (join (<class stl/button) (<class stl/button-stand))
+             :on-click #(rf/dispatch [:>stand])}
+    "Stand"]])
 
 (defn player-actions-row []
   (let [won? @(rf/subscribe [:won?])
