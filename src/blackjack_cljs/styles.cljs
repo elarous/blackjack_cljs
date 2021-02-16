@@ -19,7 +19,10 @@
 (defn container []
   {:display               "grid"
    :grid-template-rows "20% 60% 20%"
-   :height                "100%"})
+   :height                "100%"
+   :margin-left "auto"
+   :margin-right "auto"
+   :max-width (sizes 200)})
 
 (defn game-row []
   {:display         "grid"
