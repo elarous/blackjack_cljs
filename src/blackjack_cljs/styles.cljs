@@ -15,15 +15,16 @@
 
 (defn container []
   {:display               "grid"
-   :grid-template-columns "20% 60% 20%"
+   :grid-template-rows "20% 60% 20%"
    :height                "100%"})
 
-(defn game-column []
-  {:display         "flex"
-   :flex-direction  "column"
+(defn game-row []
+  {:display         "grid"
+   :grid-template-rows "50% 50%"
+   :grid-template-columns "20% 60% 20%"
+   :justify-items "center"
    :padding-top     (sizes 2)
-   :padding-bottom  (sizes 2)
-   :justify-content "space-between"})
+   :padding-bottom  (sizes 2)})
 
 (defn deck []
   {:position "relative"})

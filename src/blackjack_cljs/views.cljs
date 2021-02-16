@@ -12,7 +12,7 @@
     [:img {:src   "imgs/cards/1B.svg"
            :class (<class stl/deck-card 10 false)}]]])
 
-(defn stats-column []
+(defn stats-row []
   [:div
    [:div {:class (<class stl/round-card)}
     [:div {:class (<class stl/round-lbl)} "Round"]
@@ -31,14 +31,13 @@
     [:img {:src (str "imgs/dealer.svg")}]]
    [:div {:class (<class stl/contender-name)} "Dealer"]])
 
-(defn player-actions []
+(defn player-actions-row []
   [:div
    [:button {:class (join (<class stl/button) (<class stl/button-hit))} "Hit"]
    [:button {:class (join (<class stl/button) (<class stl/button-stand))} "Stand"]])
 
 (defn player []
   [:div {:class (<class stl/player-row)}
-   [player-actions]
    [:div {:class (<class stl/contender true)}
     [:div {:class (<class stl/avatar)}
      [:img {:class (<class stl/player-avatar-img)
@@ -60,15 +59,18 @@
 (defn container [& columns]
   [:div {:class (<class stl/container)} columns])
 
-(defn game-column []
-  [:div {:class (<class stl/game-column)}
+(defn game-row []
+  [:div {:class (<class stl/game-row)}
    [dealer {:name "dealer"}]
    [cards]
+   [:div]
+   [:div]
    [cards]
-   [player {:name "player"}]])
+   [player {:name "player"}]
+   ])
 
 (defn page []
   [container
-   [deck-column]
-   [game-column]
-   [stats-column]])
+   [stats-row]
+   [game-row]
+   [player-actions-row]])
